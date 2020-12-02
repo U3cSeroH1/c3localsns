@@ -27,5 +27,8 @@ export default({
       })
       .then(response => (this.Posts = response.data));
   }
+
+  //https://cdn.discordapp.com/avatars/139707810152710144/f218070c0036af478d6baba14a3d3864
+  //https://cdn.discordapp.com/avatars/ユーザID/アバターID
 })
 </script>

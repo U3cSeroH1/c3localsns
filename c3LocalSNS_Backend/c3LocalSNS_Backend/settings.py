@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'postManager.apps.PostmanagerConfig',
     'userManager.apps.UsermanagerConfig',
     'oauthLoginManager.apps.OauthloginmanagerConfig',
-    'customDiscordProvider',
+    #'customDiscordProvider',
 
     # 3rd-party apps
     'rest_framework',
@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'allauth', # 追加
     'allauth.account', # 追加
     'allauth.socialaccount', # 追加
-    #'allauth.socialaccount.providers.discord',
+    'allauth.socialaccount.providers.discord',
 
     'dj_rest_auth',
     'dj_rest_auth.registration',
