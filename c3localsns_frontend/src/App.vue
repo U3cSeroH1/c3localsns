@@ -1,28 +1,10 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <postCreate></postCreate>
-  <postList></postList>
-  <register></register>
-
+  <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </div>
+  <router-view/>
 </template>
-
-<script>
-
-
-import postList from './components/_postList.vue'
-import postCreate from './components/_postCreate.vue'
-import register from './components/_register.vue'
-
-
-export default {
-  name: 'App',
-  components: {
-    postList,
-    postCreate,
-    register,
-  }
-}
-</script>
 
 <style>
 #app {
@@ -31,6 +13,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>

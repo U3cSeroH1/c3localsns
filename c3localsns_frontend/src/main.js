@@ -6,8 +6,9 @@ import VueAxios from 'vue-axios' //追記
 import VueCookies from 'vue-cookies'
 import DiscordOauth2 from 'discord-oauth2'
 import VueRouter from 'vue-router';
+import router from './router'
 
-const app = createApp(App)
+const app = createApp(App).use(router)
 
 app.use(VueAxios, axios, VueCookies, DiscordOauth2, VueRouter) //追記
 
