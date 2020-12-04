@@ -6,7 +6,7 @@ class Post(models.Model):
     
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     authorname = models.CharField(max_length=50, default='',)
-    authoricon = models.URLField(default='',)
+    authoravatar = models.CharField(max_length=100, default='',)
     text = models.CharField(max_length=100)
 
     def __str__(self):

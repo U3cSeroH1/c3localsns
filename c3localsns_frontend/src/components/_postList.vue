@@ -2,7 +2,8 @@
   <div class="hello">
     <li v-for="Post in Posts" :key="Post" style="display:block">
       <div >
-        <div style="display:block">{{Post.author}}</div>
+        <img :src="Post.authoravatar">
+        <div style="display:block">{{Post.authorname}}</div>
         <div>{{Post.text}}</div>
       </div>
       

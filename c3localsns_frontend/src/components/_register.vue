@@ -24,8 +24,8 @@ export default({
         .then(response => 
         {   
             this.results = response.data
-            window.$cookies.set('c3localsns-app-auth', response.data.access_token, 600);
-            window.$cookies.set('c3localsns-app-auth-refresh', response.data.refresh_token, 600);
+            window.$cookies.set('c3localsns-app-auth', response.data.access_token, 6000);
+            window.$cookies.set('c3localsns-app-auth-refresh', response.data.refresh_token, 6000);
             window.location.reload();
         })
     },

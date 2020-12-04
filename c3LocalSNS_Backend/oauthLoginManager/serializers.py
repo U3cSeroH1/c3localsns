@@ -10,3 +10,9 @@ class DiscordExDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = SocialAccount
         fields = '__all__'
+
+
+class IdPostTest(serializers.Serializer):
+    """投稿シリアライザ"""
+
+    id = serializers.CharField()
