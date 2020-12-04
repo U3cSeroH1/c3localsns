@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import discordCallBack from '../views/discordCallBack.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/callback',
+    name: 'discordCallBack',
+    component: discordCallBack
   },
   {
     path: '/about',
@@ -17,7 +23,7 @@ const routes = [
   }
 ]
 
-const router = createRouter({
+const router = new createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })

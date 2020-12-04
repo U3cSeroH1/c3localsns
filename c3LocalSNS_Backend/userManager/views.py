@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model # 追加
+from django.contrib.auth.models import User # 追加
 from rest_framework import generics
 
 
@@ -9,14 +9,19 @@ from .serializers import UserSerializer # 追加
 
 
 class UserViewset(viewsets.ModelViewSet):
-    queryset = get_user_model().objects.all()
+
+    user1 = User.objects.get(id = '6')
+    user1.socialaccount_set.all()
+    print(user1)
+
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class UserList(generics.ListAPIView):
-    queryset = get_user_model().objects.all()
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = get_user_model().objects.all()
+    queryset = User.objects.all()
     serializer_class = UserSerializer

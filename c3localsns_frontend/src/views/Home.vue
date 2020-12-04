@@ -1,8 +1,13 @@
 <template>
+  <div>
+      <register></register>
   <img alt="Vue logo" src="../assets/logo.png">
   <postCreate></postCreate>
   <postList></postList>
-  <register></register>
+
+
+  </div>
+
 </template>
 
 <script>

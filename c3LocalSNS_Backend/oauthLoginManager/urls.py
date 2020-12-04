@@ -22,5 +22,7 @@ from . import views
 urlpatterns = [
 
     path('discord/token', views.DiscordLogin.as_view(), name='discord_token'),
+    path('discord/extradata/<int:pk>/', views.DiscordExDataListAPIView.as_view(), name='discord_extradata'),
+    path('discord/test/', views.hello_world, name='discord_test'),
 
 ]
