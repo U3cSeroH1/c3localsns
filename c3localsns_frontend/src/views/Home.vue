@@ -1,13 +1,9 @@
 <template>
   <div>
-      <register></register>
-  <img alt="Vue logo" src="../assets/logo.png">
-  <postCreate></postCreate>
-  <postList></postList>
-
-
+    <register></register>
+    <postCreate></postCreate>
+    <postList></postList>
   </div>
-
 </template>
 
 <script>
@@ -20,6 +16,19 @@ export default {
     postCreate,
     postList,
     register
+  },
+  data() {
+    return {
+      isLogin: false
+    }
+  },
+  created() {
+    this.isLogin = this.checkLogin()
+  },
+  methods: {
+    checkLogin() {
+      return window.$cookies.get("c3localsns-app-auth")
+    }
   }
 }
 </script>

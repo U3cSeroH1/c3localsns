@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default({
   name: 'discordCallBack',
   data() {
@@ -42,7 +43,7 @@ export default({
             })
               .then(discordAccesInfo=>{
                 console.log(discordAccesInfo);
-                this.axios
+                axios
                   .post('http://127.0.0.1:8000/api/v1/oauthLoginManager/discord/token', {access_token: discordAccesInfo.access_token,
                     code: ""},{
                     headers: { "Content-Type": "application/json"},

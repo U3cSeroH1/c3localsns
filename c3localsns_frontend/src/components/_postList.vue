@@ -1,32 +1,30 @@
 <template>
   <div class="hello">
-    <li v-for="Post in Posts" :key="Post" style="display:block">
-      <div >
-        <img :src="Post.authoravatar">
-        <div style="display:block">{{Post.authorname}}</div>
-        <div>{{Post.text}}</div>
-      </div>
-      
+    <li v-for="post in posts" :key="post" style="display:block">
+      <post :iconUrl="post.authoravatar" :authorName="post.authorname" :text="post.text" />
     </li>
-    
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import Post from './post'
 export default({
   name: 'postList',
+  components: {
+    Post
+  },
   data() {
     return {
-      Posts: []
+      posts: []
     };
   },
   mounted() {
-    this.axios
-      .get("http://127.0.0.1:8000/api/v1/postManager/posts/list/", {
+      axios.get("http://127.0.0.1:8000/api/v1/postManager/posts/list/", {
         headers: { "Content-Type": "application/json" , "Authorization": "Bearer " + window.$cookies.get('c3localsns-app-auth')},
 
       })
-      .then(response => (this.Posts = response.data));
+      .then(response => (this.posts = response.data));
   }
 
   //https://cdn.discordapp.com/avatars/139707810152710144/f218070c0036af478d6baba14a3d3864

@@ -1,14 +1,15 @@
 <template>
   <div class="hello">
-    <span>Multiline text is:</span>
     <p style="white-space: pre-line;">{{ text }}</p>
 
     <textarea v-model="text" placeholder="add multiple lines"></textarea>
-    <button v-on:click="postText">あほ</button>
+    <br />
+    <button v-on:click="postText">Post</button>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default({
   name: 'postCreate',
   data() {
@@ -20,7 +21,7 @@ export default({
   methods:{
     postText: function(){
 
-      this.axios
+      axios
         .get('http://127.0.0.1:8000/dj-rest-auth/user/', 
             {headers: { "Content-Type": "application/json" , "Authorization": "Bearer " + window.$cookies.get('c3localsns-app-auth')},
             //ここで使ってる奴のid見る
@@ -30,7 +31,7 @@ export default({
           const author = response.data.pk
           console.log(response.data)
 
-          this.axios
+          axios
             .get('http://127.0.0.1:8000/api/v1/oauthLoginManager/discord/extradata/?f=' + response.data.pk, 
                 {headers: { "Content-Type": "application/json" , "Authorization": "Bearer " + window.$cookies.get('c3localsns-app-auth')},
                 //ここで使ってる奴のid見る
@@ -62,7 +63,7 @@ export default({
               }
               
               //console.log(response.data.username)
-              this.axios
+              axios
                 .post('http://127.0.0.1:8000/api/v1/postManager/posts/create/', { text : this.text ,authorname:authorname, authoravatar:authoravatar, author : author },{
                   headers: { "Content-Type": "application/json" , "Authorization": "Bearer " + window.$cookies.get('c3localsns-app-auth')},
                 })

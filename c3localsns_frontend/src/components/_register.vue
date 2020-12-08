@@ -1,25 +1,31 @@
 <template>
   <div class="hello">
-    <button onclick="location.href='https://discord.com/api/oauth2/authorize?client_id=781573068560662539&redirect_uri=http%3A%2F%2F127.0.0.1%3A8080%2Fcallback&response_type=code&scope=identify%20guilds'">ぢｓこｒｄろぐいんぽ！！！！！！</button>
-    <br><br><br>
-
-    <button v-on:click="logout">でてけぇ！！！！！！！！！！！！！！！！！</button>
+    <button v-if="!isLogin" onclick="location.href='https://discord.com/api/oauth2/authorize?client_id=781573068560662539&redirect_uri=http%3A%2F%2F127.0.0.1%3A8080%2Fcallback&response_type=code&scope=identify%20guilds'">Discord Login</button>
+    <button v-on:click="logout">Logout</button>
   </div>
   
 </template>
 
 <script>
+import axios from 'axios'
 export default({
   name: 'postList',
   data() {
     return {
       username:"",
-      password:""
+      password:"",
+      isLogin: false
     };
   },
+  created() {
+    this.isLogin = this.checkLogin()
+  },
   methods: {
+    checkLogin() {
+      return window.$cookies.get("c3localsns-app-auth")
+    },
     login: function(){
-      this.axios
+      axios
         .post('http://127.0.0.1:8000/dj-rest-auth/login/', { username : this.username , password : this.password })
         .then(response => 
         {   
@@ -33,7 +39,7 @@ export default({
       
     },
     logout: function(){
-      this.axios
+      axios
         .post('http://127.0.0.1:8000/dj-rest-auth/logout/', {
           headers: { "Content-Type": "application/json"},
         })
