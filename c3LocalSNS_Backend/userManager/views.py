@@ -9,11 +9,6 @@ from .serializers import UserSerializer # 追加
 
 
 class UserViewset(viewsets.ModelViewSet):
-
-    user1 = User.objects.get(id = '6')
-    user1.socialaccount_set.all()
-    print(user1)
-
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
