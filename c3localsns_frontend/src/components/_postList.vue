@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <li v-for="post in posts" :key="post" style="display:block">
-      <post :iconUrl="post.authoravatar" :authorName="post.authorname" :text="post.text" />
+      <post :post="post" />
     </li>
   </div>
 </template>

@@ -11,4 +11,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.text
+    
+    @property
+    def favorites(self):
+        return self.favorite_set.all()
 
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)

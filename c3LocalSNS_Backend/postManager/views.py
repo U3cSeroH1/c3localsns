@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Post
-from .serializers import PostSerializer
+from .models import Post, Favorite
+from .serializers import PostSerializer, FavoriteSerializer
 
 
 from rest_framework.response import Response
@@ -35,3 +35,7 @@ class PostCreateAPIView(generics.ListCreateAPIView):
     #permission_classes = (IsAuthorOrReadOnly,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+class FavoriteViewSet(viewsets.ModelViewSet):
+    queryset = Favorite.objects.order_by("-id")
+    serializer_class = FavoriteSerializer

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path, include
 from rest_framework.routers import SimpleRouter
-from .views import PostViewSet
+from .views import PostViewSet, FavoriteViewSet
 from . import views
 
 
@@ -25,10 +25,16 @@ from . import views
 #urlpatterns = router.urls
 
 urlpatterns = [
-    
-
-
+    path('posts', PostViewSet.as_view({
+        'get': 'list',
+        'post': 'create',
+        'update': 'update'
+    })),
     path('posts/list/', views.PostListAPIView.as_view()),
     path('posts/create/', views.PostCreateAPIView.as_view()),
     path('posts/detail/<int:pk>/', views.PostDetailAPIView.as_view()),
+    path('favorites', FavoriteViewSet.as_view({
+        'get': 'list',
+        'post': 'create',
+    }))
 ]

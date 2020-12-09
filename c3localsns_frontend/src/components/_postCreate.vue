@@ -64,7 +64,7 @@ export default({
               
               //console.log(response.data.username)
               axios
-                .post('http://127.0.0.1:8000/api/v1/postManager/posts/create/', { text : this.text ,authorname:authorname, authoravatar:authoravatar, author : author },{
+                .post('http://127.0.0.1:8000/api/v1/postManager/posts/create/', { text : this.text ,authorname:authorname, authoravatar:authoravatar, author_id : author },{
                   headers: { "Content-Type": "application/json" , "Authorization": "Bearer " + window.$cookies.get('c3localsns-app-auth')},
                 })
                 .then(response => {this.results = response.data})

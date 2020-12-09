@@ -15,13 +15,13 @@ Including another URLconf
 """
 from django.urls import path, include
 from rest_framework.routers import SimpleRouter
-from .views import UserViewset
+from .views import UserViewset, UserList, UserDetail
 
 router = SimpleRouter()
 router.register('', UserViewset)
 urlpatterns = router.urls
 
-#urlpatterns = [
-#    path('users/', UserList.as_view()),
-#    path('users/<int:pk>/', UserDetail.as_view()),
-#]
+urlpatterns = [
+    path('users/', UserList.as_view()),
+    path('users/<int:pk>/', UserDetail.as_view()),
+]
