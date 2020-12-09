@@ -191,3 +191,30 @@ ACCOUNT_ADAPTER = 'customDiscordProvider.adapter.MyAccountAdapter'
 
 DISCORD_SCOPES = ['email', 'identify', 'connections', 'guilds', 'messages.read']
 
+GUILD_ID='656128980805615618'
+
+LOGGING = {
+    'version': 1,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'Django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    }
+}  

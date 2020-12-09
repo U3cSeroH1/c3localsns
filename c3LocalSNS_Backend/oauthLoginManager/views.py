@@ -15,6 +15,7 @@ from allauth.socialaccount.providers.oauth2.views import (
 )
 from allauth.socialaccount.models import (
     SocialAccount,
+    SocialToken
 )
 
 from django_filters.rest_framework import DjangoFilterBackend
@@ -25,6 +26,10 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 
 from django.db.models import Q
+
+import logging
+
+logger = logging.getLogger('development')
 
 class DiscordLogin(SocialLoginView):
     adapter_class = DiscordOAuth2Adapter

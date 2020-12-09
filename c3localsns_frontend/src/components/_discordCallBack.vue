@@ -11,35 +11,34 @@ export default({
   name: 'discordCallBack',
   data() {
     return {
-
+      oauthClientId: "783546093198639146",
+      oauthClientSecret: "Q8nFq7vYWVMRwu5kWO2rDAnb82hwSG1p",
+      oauthRedirectUri: "http://localhost:8080/callback"
     };
   },
 
   mounted() {
     //vue-router使える人いたらここそれ専用に書き換えといて
 
-    var url = location.search;
+    const urlParams = new URLSearchParams(window.location.search)
     //document.getElementById("urlparam").innerHTML = url;
 
-    const code = url.substr(6);
-    console.log(url);
+    const code = urlParams.get("code");
+    console.log("Code: ", code)
 
     if(!window.$cookies.isKey('c3localsns-app-auth') && code){
       const DiscordOauth2 = require("discord-oauth2");
             const oauth = new DiscordOauth2();
-
-
-
             oauth
               .tokenRequest({
-                clientId: "781573068560662539",
-                clientSecret: "OiSPDK6CChZwne3fRDsBb-80tVQCCUyX",
+                clientId: this.oauthClientId,
+                clientSecret: this.oauthClientSecret,
             
                 code: code,
                 scope: "identify guilds",
                 grantType: "authorization_code",
                 
-                redirectUri: "http://127.0.0.1:8080/callback",
+                redirectUri: this.oauthRedirectUri,
             })
               .then(discordAccesInfo=>{
                 console.log(discordAccesInfo);

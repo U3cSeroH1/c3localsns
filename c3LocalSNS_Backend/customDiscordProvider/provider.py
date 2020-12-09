@@ -1,6 +1,14 @@
 from allauth.socialaccount.providers.base import ProviderAccount
 from allauth.socialaccount.providers.oauth2.provider import OAuth2Provider
+from allauth.account.signals import user_signed_up, user_logged_in
+from django.http.response import HttpResponseForbidden
 from django.conf import settings
+from logging import getLogger
+from allauth.socialaccount.models import SocialAccount, SocialToken
+from .discord_cli import checkGuild, getGuilds
+from django.conf import settings
+
+logger = getLogger('Django')
 
 
 class DiscordAccount(ProviderAccount):
@@ -30,3 +38,17 @@ class DiscordProvider(OAuth2Provider):
 
 
 provider_classes = [DiscordProvider]
+
+def checkUserInDiscordGuild(user, **kwargs):
+    logger.debug(user)
+    socialAccount = SocialAccount.objects.filter(user=user).first()
+    socialToken = SocialToken.objects.filter(account=socialAccount).first()
+    logger.debug(socialToken.token)
+    try:
+        if not checkGuild(socialToken.token, settings.GUILD_ID):
+            logger.debug(status)
+            raise HttpResponseForbidden()
+    except BaseException:
+        raise HttpResponseForbidden()
+
+user_logged_in.connect(checkUserInDiscordGuild)
