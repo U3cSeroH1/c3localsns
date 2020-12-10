@@ -54,9 +54,7 @@ export default({
                       window.$cookies.set('c3localsns-app-auth', response.data.access_token, 600);
                       window.$cookies.set('c3localsns-app-auth-refresh', response.data.refresh_token, 600);
                       this.$router.push('/')
-                      
                   })
-                
             })
         }
     }

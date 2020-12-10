@@ -1,10 +1,12 @@
 <template>
   <div>
-    <button @click="favorite()">♡{{ post.favorites.length }}</button>
+    <i v-if="!this.isMeFavorited" class="mdi mdi-heart-outline" @click="favorite() " aria-hidden="true"></i>
+    <i v-if="this.isMeFavorited" class="mdi mdi-heart" @click="favorite() " aria-hidden="true"></i>
   </div>
 </template>
 <script>
 import axios from 'axios'
+
 export default {
   props: {
     post: {}
@@ -24,6 +26,12 @@ export default {
           }
         }
       )
+    }
+  },
+  computed: {
+    isMeFavorited() {
+      if(this.post.favorites !== [] && this.post.favorites.length > 0) return true
+      else return false
     }
   }
 }

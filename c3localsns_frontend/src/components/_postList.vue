@@ -1,8 +1,10 @@
 <template>
-  <div class="hello">
-    <li v-for="post in posts" :key="post" style="display:block">
-      <post :post="post" />
-    </li>
+  <div class="columns">
+    <div class="column"></div>
+    <div class="column is-four-fifths">
+      <post :post="post" v-for="post in posts" :key="post" style="display:block" />
+    </div>
+    <div class="column"></div>
   </div>
 </template>
 
@@ -22,7 +24,6 @@ export default({
   mounted() {
       axios.get("http://127.0.0.1:8000/api/v1/postManager/posts/list/", {
         headers: { "Content-Type": "application/json" , "Authorization": "Bearer " + window.$cookies.get('c3localsns-app-auth')},
-
       })
       .then(response => (this.posts = response.data));
   }

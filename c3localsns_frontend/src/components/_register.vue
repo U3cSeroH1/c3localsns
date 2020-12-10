@@ -1,7 +1,9 @@
 <template>
-  <div class="hello">
-    <button v-if="!isLogin" @click="redirectDiscordLogin()">Discord Login</button>
-    <button @click="logout">Logout</button>
+  <div class="navbar-item">
+    <div class="buttons">
+      <button class="button is-primary" v-if="!isLogin" @click="redirectDiscordLogin()">Login</button>
+      <button class="button" @click="logout">Logout</button>
+    </div>
   </div>
 </template>
 

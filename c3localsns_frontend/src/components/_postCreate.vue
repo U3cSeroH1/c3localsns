@@ -1,10 +1,16 @@
 <template>
-  <div class="hello">
-    <p style="white-space: pre-line;">{{ text }}</p>
-
-    <textarea v-model="text" placeholder="add multiple lines"></textarea>
-    <br />
-    <button v-on:click="postText">Post</button>
+  <div>
+    <div class="field">
+      <label class="label">Text</label>
+      <div class="control">
+        <textarea class="textarea" v-model="text" placeholder="Text"></textarea>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <button class="button is-primary" v-on:click="postText">Post</button>
+      </div>
+    </div>
   </div>
 </template>
 

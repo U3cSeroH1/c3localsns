@@ -1,9 +1,30 @@
 <template>
-  <div>
-    <img :src="post.authoravatar">
-    <h3>{{ post.author.username }}</h3>
-    <p>{{ post.text }}</p>
-    <favorite-button :post="post"></favorite-button>
+  <div class="box">
+    <article class="media">
+      <div class="media-left">
+        <figure class="image is-64x64">
+          <img :src="post.authoravatar">
+        </figure>
+      </div>
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong>{{ post.author.first_name }}</strong>
+            <br />
+            {{ post.text }}
+          </p>
+        </div>
+        <nav class="level is-mobile">
+        <div class="level-left">
+          <a class="level-item" aria-label="reply">
+            <span class="icon is-small">
+              <favorite-button :post="post"></favorite-button>
+            </span>
+          </a>
+        </div>
+      </nav>
+      </div>
+    </article>
   </div>
 </template>
 <script>
@@ -21,5 +42,8 @@ FavoriteButton
 <style scoped>
 img {
   width: 3rem;
+}
+.box {
+  margin: 3rem 0;
 }
 </style>

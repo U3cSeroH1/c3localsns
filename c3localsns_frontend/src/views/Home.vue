@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <register></register>
+  <div class="container is-max-desktop">
     <postCreate></postCreate>
     <postList></postList>
   </div>
@@ -9,13 +8,11 @@
 <script>
 import postCreate from '../components/_postCreate.vue'
 import postList from '../components/_postList.vue'
-import register from '../components/_register.vue'
 export default {
   name: 'Home',
   components: {
     postCreate,
     postList,
-    register
   },
   data() {
     return {
