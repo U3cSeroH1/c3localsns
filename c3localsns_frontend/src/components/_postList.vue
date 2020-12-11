@@ -2,15 +2,16 @@
   <div class="columns">
     <div class="column"></div>
     <div class="column is-four-fifths">
-      <post :post="post" v-for="post in posts" :key="post" style="display:block" />
+      <post :post="post" v-for="post in getList" :key="post" style="display:block" />
     </div>
     <div class="column"></div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
 import Post from './post'
+import { mapActions, mapGetters } from 'vuex'
+
 export default({
   name: 'postList',
   components: {
@@ -21,12 +22,19 @@ export default({
       posts: []
     };
   },
+  methods: {
+    ...mapActions([
+      'updateStatusList'
+    ])
+  },
+  computed: {
+    ...mapGetters([
+      'getList'
+    ])
+  },
   mounted() {
-      axios.get("http://127.0.0.1:8000/api/v1/postManager/posts/list/", {
-        headers: { "Content-Type": "application/json" , "Authorization": "Bearer " + window.$cookies.get('c3localsns-app-auth')},
-      })
-      .then(response => (this.posts = response.data));
-  }
+    this.updateStatusList()
+  },
 
   //https://cdn.discordapp.com/avatars/139707810152710144/f218070c0036af478d6baba14a3d3864
   //https://cdn.discordapp.com/avatars/ユーザID/アバターID

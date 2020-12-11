@@ -35,6 +35,9 @@ export default {
   },
   props: {
     post: {}
+  },
+  created() {
+    console.log(this.post)
   }
 }
 </script>
