@@ -1,4 +1,3 @@
-from discord import Client
 import requests
 from logging import getLogger
 logger = getLogger('Django')
