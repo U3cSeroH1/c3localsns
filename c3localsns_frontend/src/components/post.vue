@@ -29,6 +29,7 @@
 </template>
 <script>
 import FavoriteButton from './favoriteButton.vue'
+import defaultavatar from '../../public/defaultavatar.png'
 export default {
   components: {
     FavoriteButton
@@ -41,7 +42,14 @@ export default {
   },
   methods: {
     getAvatarUrl(userId, avatarId) {
-      return `https://cdn.discordapp.com/avatars/${userId}/${avatarId}.png?size=256`
+
+      if(avatarId === null){
+        return defaultavatar
+      }
+      else{
+        return `https://cdn.discordapp.com/avatars/${userId}/${avatarId}.png?size=256`
+      }
+      
     }
   }
 }
