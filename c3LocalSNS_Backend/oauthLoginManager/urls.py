@@ -22,7 +22,7 @@ from . import views
 urlpatterns = [
 
     path('discord/token', views.DiscordLogin.as_view(), name='discord_token'),
-    path('discord/extradata/', views.DiscordExDataListAPIView.as_view(), name='discord_extradata'),
+    path('discord/extradata', views.DiscordExDataView.as_view(), name='discord_extradata'),
     path('discord/test/', views.hello_world, name='discord_test'),
     path('discord/test2/', views.UserNameAPI.as_view(), name='discord_test2'),
 

@@ -7,8 +7,9 @@ import router from './router'
 import 'bulma/bulma.sass'
 import './styles/variables.scss'
 import '../node_modules/@mdi/font/scss/materialdesignicons.scss'
+import store from './store'
 
-const app = createApp(App)
+const app = createApp(App).use(store)
 
 app.use(router, VueRouter, VueCookies, DiscordOauth2) //追記
 

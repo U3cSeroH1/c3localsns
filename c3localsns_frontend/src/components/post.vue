@@ -3,7 +3,7 @@
     <article class="media">
       <div class="media-left">
         <figure class="image is-64x64">
-          <img :src="post.authoravatar">
+          <img class="is-rounded" :src="getAvatarUrl(post.author.extra_data.id, post.author.extra_data.avatar)">
         </figure>
       </div>
       <div class="media-content">
@@ -29,19 +29,35 @@
 </template>
 <script>
 import FavoriteButton from './favoriteButton.vue'
+import defaultavatar from '../../public/defaultavatar.png'
 export default {
   components: {
     FavoriteButton
   },
   props: {
     post: {}
+  },
+  created() {
+    console.log(this.post)
+  },
+  methods: {
+    getAvatarUrl(userId, avatarId) {
+
+      if(avatarId === null){
+        return defaultavatar
+      }
+      else{
+        return `https://cdn.discordapp.com/avatars/${userId}/${avatarId}.png?size=256`
+      }
+      
+    }
   }
 }
 </script>
 FavoriteButton
 <style scoped>
 img {
-  width: 3rem;
+
 }
 .box {
   margin: 3rem 0;
