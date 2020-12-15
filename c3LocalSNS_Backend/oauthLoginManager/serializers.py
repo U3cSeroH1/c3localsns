@@ -1,4 +1,5 @@
 from rest_framework import serializers
+import json
 from allauth.socialaccount.models import (
     SocialAccount,
 )
@@ -6,10 +7,15 @@ from allauth.socialaccount.models import (
 
 
 class DiscordExDataSerializer(serializers.ModelSerializer):
-    """投稿シリアライザ"""
+    extra_data = serializers.SerializerMethodField()
+
     class Meta:
         model = SocialAccount
-        fields = '__all__'
+        fields = ['extra_data']
+        # fields = '__all__'
+
+    def get_extra_data(self, obj):
+        return obj.extra_data
 
 
 class IdPostTest(serializers.Serializer):

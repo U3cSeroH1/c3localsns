@@ -5,6 +5,7 @@ const baseUrl = "http://127.0.0.1:8000/api/v1"
 export default createStore({
   state: {
     user: {},
+    extraData: {},
     token: "",
     list: [],
     hasLogin: false
@@ -17,6 +18,9 @@ export default createStore({
       console.log(user)
       state.hasLogin = true
       state.user = user
+    },
+    updateExtraData(state, extraData) {
+      state.extraData = extraData
     },
     updateList(state, list) {
       state.list = list
@@ -45,16 +49,9 @@ export default createStore({
       const res = await axios.get(baseUrl + '/oauthLoginManager/discord/extradata', {
         headers: { "Content-Type": "application/json" , "Authorization": "Bearer " + window.$cookies.get('c3localsns-app-auth')},
       })
-      console.log(res.data)
+      console.log(res.extra_data)
+      commit('updateExtraData', res.extra_data)
     },
-
-    async updateExtraData({ getters }) {
-      const res = await axios.get(baseUrl + '/oauthLoginManager/discord/extradata/?f=' + getters.getUser.pk, {
-        headers: { "Content-Type": "application/json" , "Authorization": "Bearer " + window.$cookies.get('c3localsns-app-auth')},
-      })
-      console.log(res.data)
-    },
-
     // fetchStatusList
     async updateStatusList({ commit }) {
       const res = await axios.get(baseUrl + "/postManager/posts", {
@@ -63,15 +60,16 @@ export default createStore({
       commit('updateList', res.data)
     },
 
-    async postStatus({ getters }, text) {
+    async postStatus({ getters, dispatch }, text) {
       console.log("postStatus")
       console.log(getters.getUser)
-      axios.post(baseUrl + '/postManager/posts', {
+      await axios.post(baseUrl + '/postManager/posts', {
         text: text,
         author_id: getters.getUser.pk
       }, {
         headers: { "Content-Type": "application/json" , "Authorization": "Bearer " + window.$cookies.get('c3localsns-app-auth')},
       })
+      await dispatch('updateStatusList')
     }
   },
   getters: {

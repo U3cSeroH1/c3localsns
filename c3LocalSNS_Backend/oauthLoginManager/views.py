@@ -34,6 +34,17 @@ logger = logging.getLogger('development')
 class DiscordLogin(SocialLoginView):
     adapter_class = DiscordOAuth2Adapter
 
+class DiscordExDataView(generics.GenericAPIView):
+    serializer_class = DiscordExDataSerializer
+    logger.debug("SocialAccount")
+    def get_queryset(self, *args, **kwargs):
+        logger.debug(self.request.user)
+        return SocialAccount.objects.filter(user = self.request.user).first()
+    
+    def get(self, request, *args,**kwargs):
+        serializer = self.get_serializer(self.get_queryset())
+        return Response(serializer.data)
+
 
 class DiscordExDataListAPIView(generics.ListAPIView):
     """投稿モデルの取得（一覧）APIクラス"""

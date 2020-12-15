@@ -3,7 +3,7 @@
     <article class="media">
       <div class="media-left">
         <figure class="image is-64x64">
-          <img :src="post.authoravatar">
+          <img class="is-rounded" :src="getAvatarUrl(post.author.extra_data.id, post.author.extra_data.avatar)">
         </figure>
       </div>
       <div class="media-content">
@@ -38,13 +38,18 @@ export default {
   },
   created() {
     console.log(this.post)
+  },
+  methods: {
+    getAvatarUrl(userId, avatarId) {
+      return `https://cdn.discordapp.com/avatars/${userId}/${avatarId}.png?size=256`
+    }
   }
 }
 </script>
 FavoriteButton
 <style scoped>
 img {
-  width: 3rem;
+
 }
 .box {
   margin: 3rem 0;
