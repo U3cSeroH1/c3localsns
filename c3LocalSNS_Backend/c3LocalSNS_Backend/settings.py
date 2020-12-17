@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites', # 追加
 
-
+    'channels'
 ]
 
 
@@ -101,7 +101,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'c3LocalSNS_Backend.wsgi.application'
-
+ASGI_APPLICATION = "c3LocalSNS_Backend.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
