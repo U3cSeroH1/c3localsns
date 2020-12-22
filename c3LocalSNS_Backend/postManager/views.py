@@ -19,8 +19,8 @@ class PostViewSet(viewsets.ModelViewSet):
 
     # For Notification
     def perform_create(self, serializer):
-        send_notification(NotificationChannelGroup.POST, serializer.validated_data)
         super().perform_create(serializer)
+        send_notification(NotificationChannelGroup.POST, serializer.data['id'])
 
 
 class PostListAPIView(generics.ListAPIView):
@@ -49,5 +49,5 @@ class FavoriteViewSet(viewsets.ModelViewSet):
 
     # For Notification
     def perform_create(self, serializer):
-        send_notification(NotificationChannelGroup.FAVORITE, serializer.validated_data)
         super().perform_create(serializer)
+        send_notification(NotificationChannelGroup.FAVORITE, serializer.data['id'])

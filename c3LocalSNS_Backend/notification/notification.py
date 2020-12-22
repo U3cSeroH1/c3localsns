@@ -2,6 +2,7 @@ from django.conf import settings
 import redis
 from enum import Enum
 from postManager.models import Post, Favorite
+import json
 
 import logging
 
@@ -14,7 +15,10 @@ REDIS = None
 def get_redis():
     global REDIS
     if REDIS is None:
-        REDIS = redis.Redis(host=settings.NOTIFICATION['REDIS']['REDIS_HOST'], port=settings.NOTIFICATION['REDIS']['REDIS_PORT'], db=0)
+        if settings.NOTIFICATION['REDIS']['REDIS_URL'] is not None:
+            REDIS = redis.Redis(settings.NOTIFICATION['REDIS']['REDIS_URL'], db=0)
+        else:
+            REDIS = redis.Redis(host=settings.NOTIFICATION['REDIS']['REDIS_HOST'], port=settings.NOTIFICATION['REDIS']['REDIS_PORT'], db=0)
     return REDIS
     
 
@@ -28,4 +32,5 @@ class NotificationChannelGroup(Enum):
 def send_notification(notificationChannelGroup: NotificationChannelGroup, data):
     r = get_redis()
     channel = notificationChannelGroup.name
-    r.publish(channel, 'data')
+    str_data = json.dumps(data)
+    r.publish(channel, str_data)

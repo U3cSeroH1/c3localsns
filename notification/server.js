@@ -31,13 +31,13 @@ ws.on('request', (req) => {
     console.log('Connection accepted', connection.length, 'th.')
 })
 
-const apiServerOptions = {
-
-}
-
 const redisOptions = {
     host: process.env.REDIS_HOST || 'redis',
     port: process.env.REDIS_PORT || 6379,
+}
+
+if(process.env.REDIS_URL !== undefined) {
+    redisOptions = process.env.REDIS_URL
 }
 
 const r = redis.createClient(redisOptions);
@@ -51,7 +51,7 @@ r.on('message', (channel, message) => {
     connections.forEach((con) => {
         con.send(JSON.stringify({
             channel,
-            message
+            id: parseInt(message)
         }))
     })
 })

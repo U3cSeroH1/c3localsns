@@ -17,6 +17,7 @@ dj-rest-auth = "*"
 pylint = "*"
 redis = "*"
 psycopg2 = "*"
+django-environ = "*"
 
 [dev-packages]
 

@@ -29,6 +29,8 @@ DATABASES = {
 NOTIFICATION = {
     'REDIS': {
         'REDIS_HOST': os.environ.setdefault('REDIS_HOST', 'redis'),
-        'REDIS_PORT': os.environ.setdefault('REDIS_PORT', '6379')
+        'REDIS_PORT': os.environ.setdefault('REDIS_PORT', '6379'),
+        'REDIS_URL': None
+
     }
 }
