@@ -1,0 +1,42 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  web:
+    build: ./c3LocalSNS_Backend
+    volumes:
+      - ./c3LocalSNS_Backend:/web
+    ports: 
+      - "8000:8000"
+    environment: 
+      - DJANGO_SETTINGS_MODULE=c3LocalSNS_Backend.settings.docker
+    command: bash -c "pipenv run python manage.py migrate && pipenv run python manage.py runserver 0.0.0.0:8000"
+
+  frontend:
+    build: ./c3localsns_frontend
+    volumes:
+      - ./c3localsns_frontend:/frontend
+    ports: 
+      - "8080:8080"
+    command: npm run serve
+
+  notification:
+    build: ./notification
+    volumes:
+      - ./notification:/notification
+    ports: 
+      - "5000:5000"
+    command: node server.js
+    depends_on: 
+      - redis
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: c3
+      POSTGRES_PASSWORD: c3
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+
+  redis:
+    image: redis
+    volumes:
+      - "./data/redis:/data"

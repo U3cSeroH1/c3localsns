@@ -16,6 +16,7 @@ djangorestframework-simplejwt = "*"
 dj-rest-auth = "*"
 pylint = "*"
 redis = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
