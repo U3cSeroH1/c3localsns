@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites', # 追加
-
+    'notification.apps.NotificationConfig'
 
 ]
 
@@ -226,3 +226,10 @@ LOGGING = {
         },
     }
 }  
+
+NOTIFICATION = {
+    'REDIS': {
+        'REDIS_HOST': 'localhost',
+        'REDIS_PORT': 6379
+    }
+}
