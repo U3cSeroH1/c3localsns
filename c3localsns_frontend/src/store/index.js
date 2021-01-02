@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 
-const baseUrl = "http://127.0.0.1:8000/api/v1"
+const baseUrl = "http://localhost:8000/api/v1"
 export default createStore({
   state: {
     user: {},
@@ -24,7 +24,11 @@ export default createStore({
     },
     updateList(state, list) {
       state.list = list
-    }
+    },
+    updateLatestPost(state, post) {
+      console.log('あほ')
+      state.list.splice(0, 0, post)
+    },
   },
   actions: {
     updateToken({ commit }, token) {
@@ -54,7 +58,7 @@ export default createStore({
     },
     // fetchStatusList
     async updateStatusList({ commit }) {
-      const res = await axios.get(baseUrl + "/postManager/posts", {
+      const res = await axios.get(baseUrl + "/posts/", {
         headers: { "Content-Type": "application/json" , "Authorization": "Bearer " + window.$cookies.get('c3localsns-app-auth')},
       })
       commit('updateList', res.data)
@@ -63,14 +67,64 @@ export default createStore({
     async postStatus({ getters, dispatch }, text) {
       console.log("postStatus")
       console.log(getters.getUser)
-      await axios.post(baseUrl + '/postManager/posts', {
+      await axios.post(baseUrl + '/posts/', {
         text: text,
         author_id: getters.getUser.pk
       }, {
         headers: { "Content-Type": "application/json" , "Authorization": "Bearer " + window.$cookies.get('c3localsns-app-auth')},
       })
       await dispatch('updateStatusList')
+    },
+
+    async startWebSocket({ commit }, text) {
+      console.log("otimpo")
+      //console.log(getters.getUser)
+
+      console.log(text)
+
+      // WebSocket 接続を作成
+      const socket = new WebSocket('ws://localhost:5000');
+
+      // 接続が開いたときのイベント
+      socket.addEventListener('open', function (event) {
+        socket.send('Hello Server!');
+        console.log('Message to server ', event.data);
+      });
+
+      // メッセージの待ち受け
+      socket.addEventListener('message', async function (event) {
+
+        const data = JSON.parse(event.data)
+
+
+        switch(data.channel) {
+          case "POST": {
+            console.log("ばかPOST")
+            console.log(data)
+            const res = await axios.get(baseUrl + "/posts/" + data.id + "/", {
+              headers: { "Content-Type": "application/json" , "Authorization": "Bearer " + window.$cookies.get('c3localsns-app-auth')},
+            })
+
+            
+            commit('updateLatestPost', res.data)
+            break            
+          }
+
+
+          case "FAVORITE": {
+            console.log("あほFAVORITE")
+            break
+          }
+
+
+          default: {
+            //console.log("うんちぶりぶりだいばくはつVER2")
+            //console.log(data)
+          }
+        }
+      });
     }
+
   },
   getters: {
     hasLogin(state) {

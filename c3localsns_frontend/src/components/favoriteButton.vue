@@ -14,7 +14,7 @@ export default {
   methods: {
     favorite() {
       axios.post(
-        'http://localhost:8000/api/v1/postManager/favorites',
+        'http://localhost:8000/api/v1/posts/favorites/',
         {
           user: this.post.author.id,
           post: this.post.id

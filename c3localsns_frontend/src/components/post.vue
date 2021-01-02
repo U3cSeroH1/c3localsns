@@ -38,7 +38,7 @@ export default {
     post: {}
   },
   created() {
-    console.log(this.post)
+    //console.log(this.post)
   },
   methods: {
     getAvatarUrl(userId, avatarId) {

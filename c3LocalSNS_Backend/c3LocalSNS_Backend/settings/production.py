@@ -17,16 +17,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.setdefault('DB_NAME', 'c3'),
-        'USER': os.environ.setdefault('DB_USER', 'c3')
-        'PASSWORD': os.environ.setdefault('DB_PASSWORD', 'c3')
-        'HOST': os.environ.setdefault('DB_HOST', 'db')
-        'PORT': os.environ.setdefault('DB_PORT', '5432')
+        'USER': os.environ.setdefault('DB_USER', 'c3'),
+        'PASSWORD': os.environ.setdefault('DB_PASSWORD', 'c3'),
+        'HOST': os.environ.setdefault('DB_HOST', 'db'),
+        'PORT': os.environ.setdefault('DB_PORT', '5432'),
     }
 }
 
 NOTIFICATION = {
     'REDIS': {
-        'REDIS_HOST': os.environ.setdefault('REDIS_HOST', 'redis')
-        'REDIS_PORT': os.environ.setdefault('REDIS_HOST', 6379)
+        'REDIS_HOST': os.environ.setdefault('REDIS_HOST', 'redis'),
+        'REDIS_PORT': os.environ.setdefault('REDIS_HOST', 6379),
     }
 }

@@ -16,7 +16,7 @@ services:
       - ./c3localsns_frontend:/frontend
     ports: 
       - "8080:8080"
-    command: npm run serve
+    command: bash -c "npm install && npm run serve"
 
   notification:
     build: ./notification
@@ -24,7 +24,7 @@ services:
       - ./notification:/notification
     ports: 
       - "5000:5000"
-    command: node server.js
+    command: bash -c "npm install && node server.js"
     depends_on: 
       - redis
 

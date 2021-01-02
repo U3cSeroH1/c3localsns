@@ -14,11 +14,13 @@ export default {
   methods: {
     ...mapActions([
       'updateLoginUser',
-      'updateExtraData'
+      'updateExtraData',
+      'startWebSocket'
     ])
   },
   created() {
     this.updateLoginUser(null)
+    this.startWebSocket(null)
     //this.updateExtraData()
   }
 }

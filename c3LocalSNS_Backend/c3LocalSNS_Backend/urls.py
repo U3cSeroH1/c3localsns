@@ -29,8 +29,8 @@ API_DESCRIPTION = 'c3の社内SNSアプリです！！！黙れ！！！！！�
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/postManager/', include('postManager.urls')),
-    path('api/v1/userManager/', include('userManager.urls')),
+    path('api/v1/posts/', include('postManager.urls')),
+    path('api/v1/users/', include('userManager.urls')),
     path('api/v1/oauthLoginManager/', include('oauthLoginManager.urls')),
     path('api/v1/oauthLoginManager/', include('customDiscordProvider.urls')),
 

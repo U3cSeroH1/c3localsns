@@ -19,22 +19,24 @@ from .views import PostViewSet, FavoriteViewSet
 from . import views
 
 
-#router = SimpleRouter()
-#router.register('', PostViewSet)
+router = SimpleRouter()
+router.register(r'favorites', FavoriteViewSet)
+router.register(r'', PostViewSet)
 
-#urlpatterns = router.urls
 
-urlpatterns = [
-    path('posts', PostViewSet.as_view({
-        'get': 'list',
-        'post': 'create',
-        'update': 'update'
-    })),
-    path('posts/list/', views.PostListAPIView.as_view()),
-    path('posts/create/', views.PostCreateAPIView.as_view()),
-    path('posts/detail/<int:pk>/', views.PostDetailAPIView.as_view()),
-    path('favorites', FavoriteViewSet.as_view({
-        'get': 'list',
-        'post': 'create',
-    }))
-]
+urlpatterns = router.urls
+
+# urlpatterns = [
+#     path('posts', PostViewSet.as_view({
+#         'get': 'list',
+#         'post': 'create',
+#         'update': 'update'
+#     })),
+#     path('posts/list/', views.PostListAPIView.as_view()),
+#     path('posts/create/', views.PostCreateAPIView.as_view()),
+#     path('posts/detail/<int:pk>/', views.PostDetailAPIView.as_view()),
+#     path('favorites', FavoriteViewSet.as_view({
+#         'get': 'list',
+#         'post': 'create',
+#     }))
+# ]
