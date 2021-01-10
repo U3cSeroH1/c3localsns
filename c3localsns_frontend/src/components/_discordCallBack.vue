@@ -31,7 +31,8 @@ export default({
     const code = urlParams.get("code");
     console.log("Code: ", code)
 
-    if(!window.$cookies.isKey('c3localsns-app-auth') && code){
+    if(code){
+      console.log('Discord token request')
       const DiscordOauth2 = require("discord-oauth2");
         const oauth = new DiscordOauth2();
           oauth.tokenRequest({
@@ -41,8 +42,9 @@ export default({
             scope: "identify guilds",
             grantType: "authorization_code",
             redirectUri: this.oauthRedirectUri,
-          }).then(discordAccessInfo=>{
-            axios.post('http://127.0.0.1:8000/api/v1/oauthLoginManager/discord/token', {
+          }).then(discordAccessInfo => {
+            console.log('got accesstoken')
+            axios.post('http://localhost:8000/api/v1/oauthLoginManager/discord/token', {
                 access_token: discordAccessInfo.access_token,
                 code: ""
               },{
