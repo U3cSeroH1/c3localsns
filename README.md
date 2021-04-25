@@ -1,4 +1,12 @@
-# c3localsns_frontend
+# c3localsns
+
+c3のローカルSNSの前身
+
+Django/Vue
+
+Websocket対応
+
+DiscordとのOAuth対応
 
 ## Project setup Frontend
  1. c3localsns_frontendに入る
